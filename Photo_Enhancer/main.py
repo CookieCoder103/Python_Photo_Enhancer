@@ -2,7 +2,6 @@ from PIL import Image, ImageEnhance, ImageFilter
 import os
 
 path = './imgs'
-
 pathOut = './editedImgs'
 
 if not os.path.exists(pathOut):
@@ -11,15 +10,13 @@ if not os.path.exists(pathOut):
 for filename in os.listdir(path):
     img = Image.open(os.path.join(path, filename))
     
-img - img.convert('RGB')
-    
-edit = img.filter(ImageFilter.SMOOTH)
+img = img.convert("RGB")
+
+edit = img.filter(ImageFilter.SMOOTH_MORE)
 edit = img.filter(ImageFilter.BLUR)
-    
-img_con = ImageEnhance.Contrast(img)
-img_con.enhance(1.3)
-    
-    
+
+enhancer = ImageEnhance.Contrast(edit)
+edited_img = enhancer.enhance(1.25)
+
 clean_name = os.path.splitext(filename)[0]
-    
-edit.save(os.path.join(pathOut, f'{clean_name}_edited.png'))
+edited_img.save(os.path.join(pathOut, f'{clean_name}_edited.jpg'))
